@@ -1,0 +1,43 @@
+
+[
+  {
+    "id": "A001",
+    "name": "Ambulance 001",
+    "latitude": 26.218,
+    "longitude": 78.182,
+    "status": "available",
+    "operational": true,
+    "capabilities": ["trauma", "cardiac", "general"],
+    "location_updated_seconds_ago": 10
+  },
+  {
+    "id": "A002",
+    "name": "Ambulance 002",
+    "latitude": 26.235,
+    "longitude": 78.190,
+    "status": "available",
+    "operational": true,
+    "capabilities": ["trauma", "general"],
+    "location_updated_seconds_ago": 20
+  },
+  {
+    "id": "A003",
+    "name": "Ambulance 003",
+    "latitude": 26.205,
+    "longitude": 78.165,
+    "status": "busy",
+    "operational": true,
+    "capabilities": ["cardiac", "stroke"],
+    "location_updated_seconds_ago": 5
+  },
+  {
+    "id": "A004",
+    "name": "Ambulance 004",
+    "latitude": 26.225,
+    "longitude": 78.150,
+    "status": "available",
+    "operational": false,
+    "capabilities": ["trauma", "cardiac", "general"],
+    "location_updated_seconds_ago": 15
+  }
+]

@@ -1,0 +1,43 @@
+
+[
+  {
+    "id": "H001",
+    "name": "Central Care Hospital",
+    "latitude": 26.218,
+    "longitude": 78.182,
+    "specialties": ["trauma", "cardiac", "general"],
+    "accepting_patients": true,
+    "current_load": 45,
+    "estimated_eta_minutes":8
+  },
+  {
+    "id": "H002",
+    "name": "Northside Emergency Hospital",
+    "latitude": 26.235,
+    "longitude": 78.190,
+    "specialties": ["trauma", "general"],
+    "accepting_patients": true,
+    "current_load": 70,
+    "estimated_eta_minutes":12
+  },
+  {
+    "id": "H003",
+    "name": "Heart and Stroke Centre",
+    "latitude": 26.205,
+    "longitude": 78.165,
+    "specialties": ["cardiac", "stroke"],
+    "accepting_patients": true,
+    "current_load": 30,
+    "estimated_eta_minutes":6
+  },
+  {
+    "id": "H004",
+    "name": "Westside Medical Centre",
+    "latitude": 26.225,
+    "longitude": 78.150,
+    "specialties": ["trauma", "cardiac", "general"],
+    "accepting_patients": false,
+    "current_load": 20,
+    "estimated_eta_minutes":5
+  }
+]
