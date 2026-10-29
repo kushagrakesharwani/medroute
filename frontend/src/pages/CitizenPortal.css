@@ -1,0 +1,224 @@
+
+/* MedRoute — Citizen Portal */
+
+.citizen-portal {
+  box-sizing: border-box;
+  width: min(100% - 32px, 960px);
+  margin: 36px auto;
+  padding: 32px;
+  color: #172033;
+  background: #ffffff;
+  border: 1px solid #e5eaf1;
+  border-radius: 18px;
+  box-shadow: 0 12px 36px rgb(15 23 42 / 6%);
+  text-align: left;
+}
+
+.citizen-portal h2 {
+  margin: 0 0 10px;
+  color: #172033;
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  font-weight: 750;
+  letter-spacing: -0.04em;
+}
+
+.citizen-portal h3 {
+  margin: 0 0 14px;
+  color: #172033;
+  font-size: 1.15rem;
+}
+
+.citizen-portal h4 {
+  margin: 14px 0 8px;
+  color: #344054;
+}
+
+.citizen-portal p {
+  margin: 0 0 12px;
+  color: #475467;
+  line-height: 1.65;
+}
+
+.citizen-portal .simulation-notice {
+  margin: 24px 0;
+  padding: 16px 18px;
+  border: 1px solid #fedf89;
+  border-left: 4px solid #d97706;
+  border-radius: 12px;
+  background: #fffaeb;
+  color: #7a3e08;
+  line-height: 1.6;
+}
+
+.citizen-portal form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px 18px;
+  margin-top: 24px;
+}
+
+.citizen-portal form > div {
+  min-width: 0;
+}
+
+.citizen-portal label {
+  display: block;
+  margin-bottom: 8px;
+  color: #344054;
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.citizen-portal input,
+.citizen-portal select,
+.citizen-portal textarea {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 46px;
+  padding: 12px 14px;
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+  background: #fff;
+  color: #172033;
+  font: inherit;
+  font-size: 0.95rem;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.citizen-portal textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.citizen-portal input:focus,
+.citizen-portal select:focus,
+.citizen-portal textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgb(37 99 235 / 13%);
+}
+
+.citizen-portal small {
+  display: block;
+  margin-top: 8px;
+  color: #667085;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.citizen-portal .hospital-recommendations {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid #dbe5f3;
+  border-radius: 14px;
+  background: #f8faff;
+}
+
+.citizen-portal .hospital-recommendations > div {
+  padding: 16px;
+  border: 1px solid #e4e7ec;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.citizen-portal .hospital-recommendations p {
+  margin-bottom: 8px;
+}
+
+.citizen-portal .case-confirmation {
+  margin: 24px 0;
+  padding: 22px;
+  border: 1px solid #a6f4c5;
+  border-left: 4px solid #16a34a;
+  border-radius: 12px;
+  background: #f0fdf4;
+  overflow-wrap: anywhere;
+}
+
+.citizen-portal .case-confirmation h3 {
+  color: #166534;
+}
+
+.citizen-portal [role="alert"] {
+  padding: 12px;
+  border-radius: 8px;
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.citizen-portal form > button {
+  grid-column: 1 / -1;
+  width: 100%;
+  min-height: 50px;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #b42318;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 150ms ease, transform 150ms ease;
+}
+
+.citizen-portal form > button:hover:not(:disabled) {
+  background: #912018;
+  transform: translateY(-1px);
+}
+
+.citizen-portal form > button:focus-visible {
+  outline: 3px solid #fda29b;
+  outline-offset: 3px;
+}
+
+.citizen-portal form > button:disabled {
+  background: #e08b87;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+  .citizen-portal {
+    width: calc(100% - 24px);
+    margin: 16px auto;
+    padding: 20px;
+    border-radius: 14px;
+  }
+
+  .citizen-portal form {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .citizen-portal .hospital-recommendations {
+    padding: 14px;
+  }
+}
+/* Highlight the algorithm's recommended hospital */
+.citizen-portal .recommended-hospital-card {
+  padding: 20px;
+  border: 1px solid #a7c7ff;
+  border-left: 5px solid #2563eb;
+  border-radius: 12px;
+  background: #eff6ff;
+}
+
+.citizen-portal .recommended-hospital-card h4 {
+  margin-top: 0;
+  color: #1d4ed8;
+  font-size: 1rem;
+}
+
+.citizen-portal .recommended-hospital-card p {
+  margin-bottom: 8px;
+}
+
+.citizen-portal .recommended-hospital-card p:first-of-type {
+  color: #172033;
+  font-size: 1.1rem;
+  font-weight: 750;
+}

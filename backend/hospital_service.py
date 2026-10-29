@@ -1,16 +1,20 @@
-import json
-from pathlib import Path
-
-
-DATA_FILE = Path(__file__).parent / "data" / "hospitals.json"
-
+from supabase_client import supabase
 
 def load_hospitals():
-    with open(DATA_FILE, "r", encoding="utf-8") as file:
-        hospitals = json.load(file)
+    response = (
+        supabase.table("hospitals")
+        .select("*")
+        .order("id")
+        .execute()
+    )
+
+    hospitals = response.data
+
+    for hospital in hospitals:
+        hospital["accepting_patients"] = hospital["accepting_cases"]
+        hospital.pop("estimated_eta_minutes", None)
 
     return hospitals
-
 
 def filter_eligible_hospitals(hospitals, emergency_type):
     eligible = []

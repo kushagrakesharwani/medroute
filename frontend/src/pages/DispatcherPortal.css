@@ -1,0 +1,248 @@
+
+.dispatcher-portal {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 28px;
+  box-sizing: border-box;
+  color: #1e293b;
+  font-family: Inter, system-ui, "Segoe UI", sans-serif;
+}
+
+.dispatcher-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 26px 28px;
+  border-radius: 16px;
+  color: white;
+  background: linear-gradient(135deg, #102844, #17547b);
+  box-shadow: 0 8px 24px rgba(15, 39, 71, 0.15);
+}
+
+.dispatcher-header h2 {
+  color: white;
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.dispatcher-header p {
+  color: #d8e7f5;
+  font-size: 14px;
+}
+
+.dispatcher-live-label {
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 1px;
+}
+
+.dispatcher-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.dispatcher-toolbar p {
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.dispatcher-portal button {
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 8px;
+  background: #1769aa;
+  color: white;
+  font-size: 13px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.dispatcher-portal button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.dispatcher-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 30px;
+}
+
+.dispatcher-stat {
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04);
+}
+
+.dispatcher-stat strong {
+  display: block;
+  margin-bottom: 7px;
+  color: #12365a;
+  font-size: 28px;
+}
+
+.dispatcher-stat span {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.dispatcher-map-section,
+.dispatcher-cases-section {
+  margin-top: 30px;
+}
+
+.dispatcher-map-section h3,
+.dispatcher-cases-section h3 {
+  margin: 0 0 8px;
+  color: #172b46;
+  font-size: 20px;
+}
+
+.dispatcher-map-section > p {
+  margin-bottom: 16px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.dispatcher-case-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.dispatcher-case-card {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 13px;
+  background: white;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+}
+
+.dispatcher-case-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.dispatcher-case-heading h4 {
+  margin: 0;
+  color: #12365a;
+  font-size: 15px;
+}
+
+.dispatcher-case-card > p {
+  margin: 9px 0;
+  color: #475569;
+  font-size: 13px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.dispatcher-case-card strong {
+  color: #1e293b;
+}
+
+.dispatcher-case-id {
+  font-size: 11px !important;
+  color: #64748b !important;
+}
+
+.dispatcher-status {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 20px;
+  background: #e2e8f0;
+  color: #334155;
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.dispatcher-status.pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.dispatcher-status.assigned {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.dispatcher-status.en_route {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.dispatcher-message,
+.dispatcher-notice {
+  margin: 18px 0;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 14px;
+}
+
+.dispatcher-error {
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.dispatcher-notice {
+  margin-top: 30px;
+  background: #fff7ed;
+  color: #9a3412;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+@media (max-width: 800px) {
+  .dispatcher-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dispatcher-case-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .dispatcher-portal {
+    padding: 20px 14px;
+  }
+
+  .dispatcher-header {
+    padding: 22px 18px;
+  }
+}
+.dispatcher-case-card > p {
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.dispatcher-case-heading h4 {
+  font-size: 16px;
+}
+
+.dispatcher-stat {
+  padding: 22px;
+}
+
+.dispatcher-stat span {
+  font-size: 14px;
+}

@@ -1,0 +1,31 @@
+﻿# Python virtual environments
+backend/.venv/
+.venv/
+venv/
+.venv_clean/
+venv_clean/
+
+# Python cache and test artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.ruff_cache/
+
+# Local routing cache
+backend/cache/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Frontend dependencies and build output
+frontend/node_modules/
+frontend/dist/
+
+# Local tooling and operating-system files
+.vscode/
+.DS_Store
+Thumbs.db

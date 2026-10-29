@@ -1,41 +1,20 @@
-
+import API_BASE_URL from "./api.js";
 import { useEffect, useState } from "react";
 import "./App.css";
+import CitizenPortal from "./pages/CitizenPortal";
+import DriverPortal from "./pages/DriverPortal";
+import HospitalPortal from "./pages/HospitalPortal";
+import DispatcherPortal from "./pages/DispatcherPortal";
+import CitizenStatus from "./pages/CitizenStatus";
 
 function App() {
+  const [activePage, setActivePage] = useState("home");
+  const [selectedCaseId, setSelectedCaseId] = useState("");
   const [backendStatus, setBackendStatus] = useState("Checking...");
   const [error, setError] = useState("");
-  const [emergencyType, setEmergencyType] = useState("trauma");
-  const [hospitals, setHospitals] = useState([]);
-  const [excludedHospitals, setExcludedHospitals] = useState([]);
-  const [recommendationError, setRecommendationError] = useState("");
-  const [loading, setLoading] = useState(false);
 
-  async function fetchRecommendations() {
-  setLoading(true);
-  setRecommendationError("");
-
-  try {
-    const response = await fetch(
-      `http://127.0.0.1:8000/hospitals/recommend?emergency_type=${emergencyType}`
-    );
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch hospital recommendations");
-    }
-
-    const data = await response.json();
-
-    setHospitals(data.recommendations);
-    setExcludedHospitals(data.excluded_hospitals);
-  } catch (err) {
-    setRecommendationError(err.message);
-  } finally {
-    setLoading(false);
-  }
-}
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/health")
+    fetch(`${API_BASE_URL}/health`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Backend request failed");
@@ -44,81 +23,260 @@ function App() {
       })
       .then((data) => {
         setBackendStatus(data.status);
+        setError("");
       })
       .catch(() => {
         setError("Could not connect to the backend.");
       });
   }, []);
 
+  const portalPages = [
+    "citizen",
+    "citizen-status",
+    "driver",
+    "hospital",
+    "dispatcher",
+  ];
+
   return (
     <main>
-      <h1>MedRoute</h1>
-      <p>Predictive Emergency Dispatch</p>
+      {activePage === "home" ? (
+        <section className="home-page">
+          <header className="home-nav">
+            <div className="home-brand">
+              <div className="home-brand-icon">M</div>
+              <div>
+                <strong>MedRoute</strong>
+                <span>Emergency Coordination System</span>
+              </div>
+            </div>
 
-      <h2>Backend Connection</h2>
-      {error ? (
-        <p>{error}</p>
-      ) : (
-        <p>Status: {backendStatus}</p>
-      )}
-      <hr />
+            <div
+              className={`backend-indicator ${
+                error
+                  ? "backend-offline"
+                  : backendStatus === "Checking..."
+                    ? ""
+                    : "backend-online"
+              }`}
+            >
+              <span className="backend-dot"></span>
+              {error
+                ? "API Disconnected"
+                : backendStatus === "Checking..."
+                  ? "Checking API..."
+                  : "API Connected"}
+            </div>
+          </header>
 
-      <h2>Hospital Recommendations</h2>
+          <section className="home-hero">
+            <div className="home-hero-content">
+              <span className="home-eyebrow">
+                SMART EMERGENCY RESPONSE
+              </span>
+              <h1>Every Second Matters.</h1>
+              <p>
+                Coordinate emergency requests, match ambulances, and identify
+                suitable hospitals through one connected dispatch platform.
+              </p>
 
-      <label htmlFor="emergencyType">Emergency Type: </label>
+              <div className="home-hero-actions">
+                <button
+                  className="home-primary-button"
+                  onClick={() => setActivePage("citizen")}
+                >
+                  Request Emergency Assistance <span>→</span>
+                </button>
 
-      <select
-        id="emergencyType"
-        value={emergencyType}
-        onChange={(event) => setEmergencyType(event.target.value)}
-      >
-        <option value="trauma">Trauma</option>
-        <option value="cardiac">Cardiac</option>
-        <option value="stroke">Stroke</option>
-        <option value="general">General Emergency</option>
-      </select>
+                <button
+                  className="home-secondary-button"
+                  onClick={() => {
+                    setSelectedCaseId("");
+                    setActivePage("citizen-status");
+                  }}
+                >
+                  Track a Request
+                </button>
+              </div>
 
-      <button onClick={fetchRecommendations} disabled={loading}>
-        {loading ? "Finding Hospitals..." : "Find Hospitals"}
-      </button>
+              <p className="home-demo-note">
+                College demonstration · Simulated emergency operations
+              </p>
+            </div>
 
-      {recommendationError && <p>{recommendationError}</p>}
+            <div className="home-hero-visual" aria-hidden="true">
+              <div className="hero-orbit orbit-one"></div>
+              <div className="hero-orbit orbit-two"></div>
+              <div className="hero-cross">+</div>
+              <div className="hero-emergency-icon">✚</div>
 
-      {hospitals.length > 0 && (
-          <section>
-            <h3>Recommended Hospitals</h3>
+              <div className="hero-floating-card hero-card-top">
+                <span>01</span>
+                <div>
+                  <strong>Dispatch</strong>
+                  <small>Coordinate response</small>
+                </div>
+              </div>
 
-            {hospitals.map((hospital) => (
-              <article key={hospital.id}>
-                <h4>{hospital.name}</h4>
-
-                <p>Estimated ETA: {hospital.estimated_eta_minutes} minutes</p>
-                <p>Current Load: {hospital.current_load}%</p>
-                <p>ETA Score: {hospital.eta_score}</p>
-                <p>Load Score: {hospital.load_score}</p>
-                <p>Final Score: {hospital.final_score ?? "Unavailable"}</p>
-              </article>
-            ))}
+              <div className="hero-floating-card hero-card-bottom">
+                <span>02</span>
+                <div>
+                  <strong>Hospital routing</strong>
+                  <small>Review suitable destinations</small>
+                </div>
+              </div>
+            </div>
           </section>
-        )}
 
-      {excludedHospitals.length > 0 && (
-        <section>
-          <h3>Excluded Hospitals</h3>
+          <section className="home-portals">
+            <div className="home-section-heading">
+              <div>
+                <span className="home-eyebrow">MEDROUTE WORKSPACE</span>
+                <h2>Choose your workspace</h2>
+                <p>Access the tools relevant to your role.</p>
+              </div>
+            </div>
 
-          {excludedHospitals.map((hospital) => (
-            <p key={hospital.hospital}>
-              {hospital.hospital} — {hospital.reason}
+            <div className="home-portal-grid">
+              <button
+                className="home-portal-card citizen-card"
+                onClick={() => setActivePage("citizen")}
+              >
+                <span className="portal-icon">＋</span>
+                <span className="portal-card-title">Citizen Portal</span>
+                <span className="portal-card-description">
+                  Submit a simulated emergency request and view its details.
+                </span>
+                <span className="portal-card-link">Create a request ↗</span>
+              </button>
+
+              <button
+                className="home-portal-card tracking-card"
+                onClick={() => {
+                  setSelectedCaseId("");
+                  setActivePage("citizen-status");
+                }}
+              >
+                <span className="portal-icon">⌕</span>
+                <span className="portal-card-title">Track Emergency</span>
+                <span className="portal-card-description">
+                  Check mission status, ambulance assignment, and hospital
+                  readiness.
+                </span>
+                <span className="portal-card-link">Track a request ↗</span>
+              </button>
+
+              <button
+                className="home-portal-card driver-card"
+                onClick={() => setActivePage("driver")}
+              >
+                <span className="portal-icon">➤</span>
+                <span className="portal-card-title">Driver Portal</span>
+                <span className="portal-card-description">
+                  View assigned emergency missions and route information.
+                </span>
+                <span className="portal-card-link">
+                  Open driver workspace ↗
+                </span>
+              </button>
+
+              <button
+                className="home-portal-card hospital-card"
+                onClick={() => setActivePage("hospital")}
+              >
+                <span className="portal-icon">✚</span>
+                <span className="portal-card-title">Hospital Portal</span>
+                <span className="portal-card-description">
+                  Review incoming cases and acknowledge hospital readiness.
+                </span>
+                <span className="portal-card-link">
+                  Open hospital workspace ↗
+                </span>
+              </button>
+
+              <button
+                className="home-portal-card dispatcher-card"
+                onClick={() => setActivePage("dispatcher")}
+              >
+                <span className="portal-icon">⌖</span>
+                <span className="portal-card-title">Dispatcher Portal</span>
+                <span className="portal-card-description">
+                  Monitor active cases, ambulance assignments, and the
+                  emergency map.
+                </span>
+                <span className="portal-card-link">
+                  Open dispatch center ↗
+                </span>
+              </button>
+            </div>
+          </section>
+
+          <footer className="home-footer">
+            <div>
+              <strong>MedRoute</strong>
+              <span>
+                Predictive Emergency Dispatch &amp; Hospital Selection
+              </span>
+            </div>
+            <p>
+              Academic project demonstration. Not for real emergency use.
             </p>
-          ))}
+          </footer>
+        </section>
+      ) : portalPages.includes(activePage) ? (
+        <section className="portal-page">
+          <header className="portal-header">
+            <div className="portal-header-brand">
+              <div className="portal-header-icon">M</div>
+              <div>
+                <strong>MedRoute</strong>
+                <span>Emergency Coordination System</span>
+              </div>
+            </div>
+
+            <div className="portal-header-status">
+              {error
+                ? "API Disconnected"
+                : backendStatus === "Checking..."
+                  ? "Checking API..."
+                  : "API Connected"}
+            </div>
+          </header>
+
+          <div className="portal-content">
+            <button
+              className="back-home-button"
+              onClick={() => setActivePage("home")}
+            >
+              ← Back to Home
+            </button>
+
+            {activePage === "citizen" ? (
+              <CitizenPortal
+                onCaseCreated={(caseId) => {
+                  setSelectedCaseId(caseId);
+                  setActivePage("citizen-status");
+                }}
+              />
+            ) : activePage === "citizen-status" ? (
+              <CitizenStatus caseId={selectedCaseId} />
+            ) : activePage === "driver" ? (
+              <DriverPortal />
+            ) : activePage === "hospital" ? (
+              <HospitalPortal />
+            ) : (
+              <DispatcherPortal />
+            )}
+          </div>
+        </section>
+      ) : (
+        <section className="home-page">
+          <p>Page not found.</p>
+          <button onClick={() => setActivePage("home")}>
+            Return Home
+          </button>
         </section>
       )}
-      {!recommendationError &&
-        !loading &&
-        hospitals.length === 0 &&
-        excludedHospitals.length > 0 && (
-          <p>No eligible hospitals found for this emergency type.</p>
-        )}
     </main>
   );
 }
