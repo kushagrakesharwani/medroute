@@ -44,7 +44,11 @@ function App() {
         <section className="home-page">
           <header className="home-nav">
             <div className="home-brand">
-              <div className="home-brand-icon">M</div>
+              <img
+                src="/medroute-logo.png"
+                alt="MedRoute"
+                className="home-brand-icon"
+              />
               <div>
                 <strong>MedRoute</strong>
                 <span>Emergency Coordination System</span>

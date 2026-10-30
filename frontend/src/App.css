@@ -25,15 +25,11 @@
 }
 
 .home-brand-icon {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: #153c62;
-  color: white;
-  font-size: 24px;
-  font-weight: 800;
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  flex-shrink: 0;
+  border-radius: 10px;
 }
 
 .home-brand strong,
