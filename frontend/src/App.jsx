@@ -231,7 +231,11 @@ function App() {
         <section className="portal-page">
           <header className="portal-header">
             <div className="portal-header-brand">
-              <div className="portal-header-icon">M</div>
+              <img
+                src="/medroute-logo.png"
+                alt="MedRoute"
+                className="portal-header-icon"
+              />
               <div>
                 <strong>MedRoute</strong>
                 <span>Emergency Coordination System</span>
